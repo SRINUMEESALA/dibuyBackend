@@ -7,7 +7,7 @@ import cors from "cors"
 const app = express()
 dotenv.config()
 
-const port = process.env.port
+const port = process.env.PORT || 4000
 
 app.listen(port, () => { console.log(`Server running Successfully at ${port}`) })
 connectToRemoteDb()
