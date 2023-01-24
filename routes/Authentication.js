@@ -2,6 +2,7 @@ import express from "express"
 import User from "../models/users.js"
 import nodemailer from "nodemailer"
 import { v4 as uuidv4 } from "uuid"
+import jwt from "jsonwebtoken"
 const authenticationRoute = new express.Router()
 
 let otpsList = []
