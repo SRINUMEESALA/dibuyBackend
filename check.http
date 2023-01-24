@@ -22,7 +22,7 @@ GET http://localhost:4000/products?category=All&price=HighToLow&quality=4&search
 
 
 ###
-POST http://localhost:4000/user/verify
+POST https://dibuybe.onrender.com/user/verify
 Content-Type: application/json
 
 {
