@@ -1,0 +1,30 @@
+POST http://localhost:4000/user/register
+Content-Type: application/json
+
+{
+    "email":"kesava@gmail.om",
+    "password":"krishna",
+    "name":"radha",
+    "mobile":"2222222222",
+    "location":"female",
+    "gender":"female",
+    "isSeller":true
+}
+
+###
+GET http://localhost:4000/products
+
+###
+GET http://localhost:4000/product/63c526dce025f86001fcb7ea
+
+###
+GET http://localhost:4000/products?category=All&price=HighToLow&quality=4&search=""
+
+
+###
+POST http://localhost:4000/user/verify
+Content-Type: application/json
+
+{
+    "email":"krishna@golok.om"
+}
