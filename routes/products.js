@@ -61,10 +61,18 @@ const products = async (request, response) => {
 
 }
 
+
+
+
+
 // Routes
 
 productsRoute.get("/products", products)
 productsRoute.get("/product/:id", product)
 
+
 export default productsRoute
 
+
+
+// "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRW1haWwiOiJzcmludXNyaTc2NTg1QGdtYWlsLmNvbSIsImlhdCI6MTY3NDcwODgzMX0.QNkp8Y4jhoKIezwAm8Nc4RYtHYeTX7AbgifIRLfCvpY"

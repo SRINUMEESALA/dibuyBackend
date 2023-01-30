@@ -1,9 +1,6 @@
 import dotenv from "dotenv"
 import express from "express"
 import connectToRemoteDb from "./databaseConnections/AtlasDbConnection.js";
-import authenticationRoute from "./routes/Authentication.js";
-import productsRoute from "./routes/products.js";
-import cartRoute from "./routes/cart.js";
 import cors from "cors"
 const app = express()
 dotenv.config()
@@ -15,9 +12,12 @@ connectToRemoteDb()
 
 app.use(express.json())
 app.use(cors())
-app.use(authenticationRoute)
-app.use(productsRoute)
-app.use(cartRoute)
+
+
+app.get("/get", (req, res) => {
+    res.sendFile("./krishna.png", { root: "/home/meesalasrinu/Desktop/projects/dibuy/dibuyBEM" }, (err) => { console.log(err) })
+})
+
 
 
 
