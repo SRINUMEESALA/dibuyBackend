@@ -148,6 +148,7 @@ const userDetails = async (request, response) => {
     }
 }
 
+
 const sendEmail = async (request, response) => {
     response.status(200)
     response.send({ email: request.currentUser })
@@ -162,8 +163,8 @@ authenticationRoute.post("/user/login", login);
 authenticationRoute.post("/user/sendotp", sendOtp)
 authenticationRoute.post("/user/verifyotp", verifyOtp)
 authenticationRoute.post("/user/verify", verifyUser)
-authenticationRoute.get("/user/getemail", authorizeUser, sendEmail)
 
+authenticationRoute.get("/user/getemail", authorizeUser, sendEmail)
 authenticationRoute.get("/users/:email", userDetails)
 
 

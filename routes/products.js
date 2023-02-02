@@ -1,19 +1,10 @@
-import express, { response } from "express"
+import express, { request, response } from "express"
 import Product from "../models/products.js"
+import User from "../models/users.js"
+import authorizeUser from "../middlewares/authorizeUser.js"
 
 const productsRoute = new express.Router()
 
-// const products = async (request, response) => {
-//     console.log("Get products accessed")
-//     try {
-//         const productsList = await Product.find()
-//         response.status(200)
-//         response.send({ productsList })
-//     } catch (err) {
-//         response.status(500)
-//         response.send("No products Found")
-//     }
-// }
 
 const product = async (request, response) => {
     console.log("Get Product is accessed")
@@ -61,6 +52,40 @@ const products = async (request, response) => {
 
 }
 
+const addProduct = async (request, response) => {
+    try {
+        console.log(request.body)
+        const prod = await Product(request.body).save()
+        const prodId = prod._id.valueOf()
+        // console.log(prodId)
+        const findingUser = await User.findOne({ email: request.currentUser })
+        // console.log(findingUser.products)
+        const newProductsList = [...findingUser.products, prodId]
+        // console.log(newProductsList)
+        const addToUser = await User.updateOne({ email: request.currentUser }, { $set: { products: newProductsList } })
+        response.status(200)
+        response.send({ msg: "Product successfully added." })
+    } catch (err) {
+        console.log(err)
+        response.status(400)
+        response.send({ msg: "could add product" })
+    }
+}
+
+const getSellerProducts = async (request, response) => {
+    try {
+        const getUser = await User.findOne({ email: request.currentUser })
+        const productsList = getUser.products
+        const allProducts = await Product.find({ _id: { $in: productsList } })
+        response.status(200)
+        response.send({ products: allProducts })
+    } catch (err) {
+        console.log(err)
+        response.status(400)
+        response.send({ msg: "Couldnot get products." })
+    }
+}
+
 
 
 
@@ -69,6 +94,8 @@ const products = async (request, response) => {
 
 productsRoute.get("/products", products)
 productsRoute.get("/product/:id", product)
+productsRoute.post("/products/add", authorizeUser, addProduct)
+productsRoute.get("/seller/products", authorizeUser, getSellerProducts)
 
 
 export default productsRoute

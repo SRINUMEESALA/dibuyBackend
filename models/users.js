@@ -37,7 +37,9 @@ const usersSchema = new mongoose.Schema({
         required: true
     },
     cart: Array,
-    orders: Array
+    orders: Array,
+    profilePhoto: String,
+    products: Array
 })
 
 

@@ -4,6 +4,8 @@ import connectToRemoteDb from "./databaseConnections/AtlasDbConnection.js";
 import authenticationRoute from "./routes/Authentication.js";
 import productsRoute from "./routes/products.js";
 import cartRoute from "./routes/cart.js";
+import sellerRoute from "./routes/Seller.js";
+import bodyParser from 'body-parser';
 import cors from "cors"
 const app = express()
 dotenv.config()
@@ -14,10 +16,13 @@ app.listen(port, () => { console.log(`Server running Successfully at ${port}`) }
 connectToRemoteDb()
 
 app.use(express.json())
+app.use(bodyParser.json({ limit: '100mb' }));
+app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 app.use(cors())
 app.use(authenticationRoute)
 app.use(productsRoute)
 app.use(cartRoute)
+app.use(sellerRoute)
 
 
 

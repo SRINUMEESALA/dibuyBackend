@@ -18,7 +18,7 @@ GET http://localhost:4000/products
 GET http://localhost:4000/product/63c7c952078701e7641f8ab4
 
 ###
-GET http://localhost:4000/products?category=All&price=HighToLow&quality=4&search=""
+GET http://localhost:4000/products?category=All&price=HighToLow&quality=1&search=""
 
 
 ###
@@ -76,3 +76,35 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRW1haWwiOiJzc
 Content-Type: application/json
 
 ###
+POST http://localhost:4000/seller/register
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRW1haWwiOiJzcmludXNyaTc2NTg1QGdtYWlsLmNvbSIsImlhdCI6MTY3NDcwODgzMX0.QNkp8Y4jhoKIezwAm8Nc4RYtHYeTX7AbgifIRLfCvpY
+Content-Type: application/json
+
+{
+    "accountNumber":1234512345,
+    "IFSC":"akajsdfk",
+    "accountHolderName":"Srinu meesala"
+}
+
+###
+GET http://localhost:4000/seller/details
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRW1haWwiOiJzcmludXNyaTc2NTg1QGdtYWlsLmNvbSIsImlhdCI6MTY3NDcwODgzMX0.QNkp8Y4jhoKIezwAm8Nc4RYtHYeTX7AbgifIRLfCvpY
+
+###
+POST http://localhost:4000/products/add
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRW1haWwiOiJzcmludXNyaTc2NTg1QGdtYWlsLmNvbSIsImlhdCI6MTY3NDcwODgzMX0.QNkp8Y4jhoKIezwAm8Nc4RYtHYeTX7AbgifIRLfCvpY
+Content-Type: application/json
+
+{
+      "category": "Decoration",
+      "title": "Radha Idol",
+      "quantity": "100",
+      "quality": "4.6",
+      "price": 1000,
+      "description": "Hare Krishna mahamantra is the best one in the world for salvation.",
+      "imageUrl":""
+}
+
+###
+GET http://localhost:4000/seller/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRW1haWwiOiJzcmludXNyaTc2NTg1QGdtYWlsLmNvbSIsImlhdCI6MTY3NDcwODgzMX0.QNkp8Y4jhoKIezwAm8Nc4RYtHYeTX7AbgifIRLfCvpY
