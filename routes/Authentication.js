@@ -3,7 +3,6 @@ import User from "../models/users.js"
 import nodemailer from "nodemailer"
 import { v4 as uuidv4 } from "uuid"
 import jwt from "jsonwebtoken"
-import authorizeUser from "../middlewares/authorizeUser.js"
 
 const authenticationRoute = new express.Router()
 
@@ -14,7 +13,7 @@ const register = async (request, response) => {
     const newDataObj = { ...request.body, cart: [] }
     try {
         const user = await User(newDataObj).save()
-        response.status(200);
+        response.status(201);
         response.send({ msg: `User Registered successfully with id ${user._id}` });
     } catch (err) {
         response.status(400);
@@ -29,7 +28,7 @@ const login = async (request, response) => {
     const user = await User.find({ email })
     const isUserExits = user.length > 0
     if (!isUserExits) {
-        response.status(400);
+        response.status(401);
         response.send({ msg: "User Not Found" });
     } else {
         const comparePswd = password === user[0].password
@@ -73,16 +72,15 @@ const sendOtp = async (request, response) => {
             port: 587,
             secure: false, // true for 465, false for other ports
             auth: {
-                user: "srinu.printila@gmail.com", // generated ethereal user    dibuyindia
-                // pass: "ypbxrkdkchrzkxwj", // generated ethereal password
-                pass: "gfikumxxmpieglfi", // generated ethereal password    wljeddklerpagoyz
+                user: "dibuy.india.organization@gmail.com", // generated ethereal user
+                pass: "xookjtzvbqhvqpss"
             },
         });
 
         const htmlCode = `<div><h5>Hello Dear Customer.Your One Time Password is</h5><h1>${generatedOtp}</h1><p>Please donot share the password with anyone.</p><p>Your OTP get expired in next 10 minute.</p><br><br><br><b><i>Thanks&regards:<br>Dibuy<br>RGUKT Srikakulam<br>Andhra Pradesh</i></b><p><b>Happing Shopping-RadheRadhe</b></p><img src='cid:krishna' width='100%'/></div> `;
 
         const options = {
-            from: 'srinu.printila@gmail.com', // sender address
+            from: 'dibuy.india.organization@gmail.com', // sender address
             to: UserEmail, // list of receivers
             subject: "Login Attempt", // Subject line
             text: "Say with me 'RadheRadhe'", // plain text body
@@ -136,23 +134,7 @@ const verifyOtp = async (request, response) => {
     }
 }
 
-const userDetails = async (request, response) => {
-    try {
-        const result = await User.find({ email: request.params.email })
-        response.status(200)
-        response.send({ user: result[0] })
-    } catch (err) {
-        console.log(err)
-        response.status(404)
-        response.send({ msg: "user doesnot exists" })
-    }
-}
 
-
-const sendEmail = async (request, response) => {
-    response.status(200)
-    response.send({ email: request.currentUser })
-}
 
 
 
@@ -164,8 +146,6 @@ authenticationRoute.post("/user/sendotp", sendOtp)
 authenticationRoute.post("/user/verifyotp", verifyOtp)
 authenticationRoute.post("/user/verify", verifyUser)
 
-authenticationRoute.get("/user/getemail", authorizeUser, sendEmail)
-authenticationRoute.get("/users/:email", userDetails)
 
 
 

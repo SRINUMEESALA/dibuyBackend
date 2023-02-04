@@ -14,7 +14,7 @@ const product = async (request, response) => {
         response.status(200)
         response.send({ product: productsList[0] })
     } catch (err) {
-        response.status(400)
+        response.status(404)
         response.send("No products Found")
     }
 }
@@ -63,11 +63,11 @@ const addProduct = async (request, response) => {
         const newProductsList = [...findingUser.products, prodId]
         // console.log(newProductsList)
         const addToUser = await User.updateOne({ email: request.currentUser }, { $set: { products: newProductsList } })
-        response.status(200)
+        response.status(201)
         response.send({ msg: "Product successfully added." })
     } catch (err) {
         console.log(err)
-        response.status(400)
+        response.status(500)
         response.send({ msg: "could add product" })
     }
 }

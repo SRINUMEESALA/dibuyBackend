@@ -13,7 +13,7 @@ const registerSeller = async (request, response) => {
         console.log(newSeller)
         const response1 = await Seller(newSeller).save()
         const response2 = await User.updateOne({ email: request.currentUser }, { $set: { isSeller: true } })
-        response.status(200)
+        response.status(201)
         response.send({ msg: "seller registered successfully" })
     } catch (err) {
         response.status(500)
@@ -38,7 +38,7 @@ const updateSeller = async (request, response) => {
     try {
         console.log("update seller accessed")
         const details = await Seller.updateOne({ sellerEmail: request.currentUser }, { $set: { ...request.body } })
-        response.status(200)
+        response.status(201)
         response.send({ msg: "Update done" })
     } catch (err) {
         response.status(400)

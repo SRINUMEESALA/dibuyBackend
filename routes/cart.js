@@ -18,7 +18,7 @@ const addToCart = async (request, response) => {
         if (cart.length === 0) {
             const Ncart = [{ productId, quantity }]
             const user = await User.updateOne({ email: request.currentUser }, { $set: { cart: Ncart } })
-            response.status(200)
+            response.status(201)
             response.send({ msg: `cart updated for user ${request.currentUser}` })
         } else {
             const isExist = cart.filter(obj => obj.productId === productId)
@@ -31,12 +31,12 @@ const addToCart = async (request, response) => {
                     }
                 })
                 const user = await User.updateOne({ email: request.currentUser }, { $set: { cart: newCart } })
-                response.status(200)
+                response.status(201)
                 response.send({ msg: `cart updated for user ${request.currentUser}` })
             } else {
                 const newCartList = [...cart, { productId, quantity }]
                 const user = await User.updateOne({ email: request.currentUser }, { $set: { cart: newCartList } })
-                response.status(200)
+                response.status(201)
                 response.send({ msg: `cart updated for user ${request.currentUser}` })
             }
         }
@@ -64,7 +64,7 @@ const getCart = async (request, response) => {
         response.send({ cart: cartProducts, quantities });
 
     } catch (err) {
-        response.status(400);
+        response.status(404);
         response.send({ msg: "something went wrong in gettting cart details" });
         console.log(err)
     }
@@ -125,7 +125,7 @@ const placeOrderAndEmptyCart = async (request, response) => {
             let info = await transporter.sendMail(options, (error, info) => {
                 if (error) {
                     console.log(error)
-                    response.status(400)
+                    response.status(500)
                     response.send({ msg: "Something Went Wrong" })
 
 
@@ -145,7 +145,7 @@ const placeOrderAndEmptyCart = async (request, response) => {
 
 
         sendOrderConfirmationByNodemailer();
-        response.status(201)
+        response.status(200)
         response.send({ msg: "successfully freed the cart and order placed." })
     } catch (err) {
         response.status(500)
