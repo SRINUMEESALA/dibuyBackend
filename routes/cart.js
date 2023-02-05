@@ -102,9 +102,9 @@ const placeOrderAndEmptyCart = async (request, response) => {
                 port: 587,
                 secure: false, // true for 465, false for other ports
                 auth: {
-                    user: "srinu.printila@gmail.com", // generated ethereal user
+                    user: "dibuy.india.organization@gmail.com", // generated ethereal user
                     // pass: "ypbxrkdkchrzkxwj", // generated ethereal password
-                    pass: "gfikumxxmpieglfi", // generated ethereal password
+                    pass: "xookjtzvbqhvqpss", // generated ethereal password
                 },
             });
 
