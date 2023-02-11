@@ -11,8 +11,10 @@ const product = async (request, response) => {
     try {
         const _id = request.params.id
         const productsList = await Product.find({ _id })
+        const similarProducts = await Product.find({ category: productsList[0].category }).limit(8)
+        console.log()
         response.status(200)
-        response.send({ product: productsList[0] })
+        response.send({ product: productsList[0], similarProducts })
     } catch (err) {
         response.status(404)
         response.send("No products Found")
