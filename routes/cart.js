@@ -10,7 +10,7 @@ const cartRoute = new express.Router()
 
 
 const addToCart = async (request, response) => {
-    console.log("add cart is accessed")
+    console.log("Accessed - AddToCart API")
     const { productId, quantity } = request.body
     try {
         const userResponse = await User.find({ email: request.currentUser })
@@ -50,6 +50,7 @@ const addToCart = async (request, response) => {
 
 
 const getCart = async (request, response) => {
+    console.log("Accessed - GetCart API")
     try {
         const user = await User.find({ email: request.currentUser })
         const cart = user[0].cart
@@ -71,6 +72,7 @@ const getCart = async (request, response) => {
 }
 
 const RemoveCartItems = async (request, response) => {
+    console.log("Accessed - RemoveCartItems API")
     try {
         const { productId } = request.body
         const lst = await User.find({ email: request.currentUser })
@@ -88,7 +90,7 @@ const RemoveCartItems = async (request, response) => {
 }
 
 const placeOrderAndEmptyCart = async (request, response) => {
-    console.log("placeOrderAndEmptyCart is accessed", request.body)
+    console.log("Accessed - Place order and empty cart API")
     try {
         const user = await User.find({ email: request.currentUser })
         const cart = user[0].cart
@@ -136,7 +138,7 @@ const placeOrderAndEmptyCart = async (request, response) => {
                     setTimeout(() => {
                         const updatedList = otpsList.filter(obj => obj.id !== otpId)
                         otpsList = updatedList
-                        console.log(otpsList)
+                        // console.log(otpsList)
                     }, 600000)
                     response.send({ msg: "Ordered email successfully sent" })
                 }
@@ -155,7 +157,7 @@ const placeOrderAndEmptyCart = async (request, response) => {
 }
 
 const getOrdersHistory = async (request, response) => {
-    console.log("entered getOrdersHistory")
+    console.log("Accessed - GetOrdersHistory API")
     try {
         const user = await User.find({ email: request.currentUser })
         const orders = user[0].orders

@@ -9,6 +9,7 @@ const authenticationRoute = new express.Router()
 let otpsList = []
 
 const register = async (request, response) => {
+    console.log("Accessed - Register API")
     const { name, email, mobile, password, location, gender } = request.body;
     const newDataObj = { ...request.body, cart: [] }
     try {
@@ -23,36 +24,46 @@ const register = async (request, response) => {
 }
 
 const login = async (request, response) => {
-    console.log("/login route is accessed")
+    console.log("Accessed - Login API")
     const { email, password } = request.body;
-    const user = await User.find({ email })
-    const isUserExits = user.length > 0
-    if (!isUserExits) {
-        response.status(401);
-        response.send({ msg: "User Not Found" });
-    } else {
-        const comparePswd = password === user[0].password
-        if (comparePswd) {
-            response.status(200);
-            response.send({ msg: "Login success!" });
+    try {
+        const user = await User.find({ email })
+        const isUserExits = user.length > 0
+        if (!isUserExits) {
+            response.status(401);
+            response.send({ msg: "User Not Found" });
         } else {
-            response.status(400);
-            response.send({ msg: "Invalid password" });
+            const comparePswd = password === user[0].password
+            if (comparePswd) {
+                response.status(200);
+                response.send({ msg: "Login success!" });
+            } else {
+                response.status(400);
+                response.send({ msg: "Invalid password" });
+            }
         }
+    } catch (err) {
+        console.log(err)
     }
+
 }
 
 const verifyUser = async (request, response) => {
-    console.log("Verify User triggered")
+    console.log("Accessed - Verify User API")
     const { email } = request.body
-    const user = await User.find({ email })
-    if (user.length !== 0) {
-        response.status(200)
-        response.send({ msg: "User Already Exists", exist: true })
-    } else {
-        response.status(400)
-        response.send({ msg: "User Doesnot Exists", exist: false })
+    try {
+        const user = await User.find({ email })
+        if (user.length !== 0) {
+            response.status(200)
+            response.send({ msg: "User Already Exists", exist: true })
+        } else {
+            response.status(400)
+            response.send({ msg: "User Doesnot Exists", exist: false })
+        }
+    } catch (err) {
+        console.log(err)
     }
+
 }
 //use app password in google security tab in googel mangage account settings
 
@@ -67,6 +78,7 @@ const sendOtp = async (request, response) => {
 
     // async..await is not allowed in global scope, must use a wrapper
     async function sendOtpByNodemailer() {
+        console.log("Accessed - Generate OTP API")
         let transporter = nodemailer.createTransport({
             host: "smtp.gmail.com",
             port: 587,
@@ -105,7 +117,7 @@ const sendOtp = async (request, response) => {
                 setTimeout(() => {
                     const updatedList = otpsList.filter(obj => obj.id !== otpId)
                     otpsList = updatedList
-                    console.log(otpsList)
+                    // console.log(otpsList)
                 }, 600000)
                 response.send({ msg: "OTP successfully sent" })
             }
@@ -118,8 +130,8 @@ const sendOtp = async (request, response) => {
 }
 
 const verifyOtp = async (request, response) => {
+    console.log("Accessed - Verify OTP API")
     const { receivedOtp, UserEmail } = request.body
-    console.log(request.body, otpsList)
     const isValidOtp = (otpsList.filter(obj => obj.generatedOtp === receivedOtp && obj.UserEmail === UserEmail)).length === 1
     if (isValidOtp) {
         const payload = { UserEmail };

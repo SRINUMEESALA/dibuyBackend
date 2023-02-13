@@ -7,10 +7,11 @@ const sellerRoute = new express.Router()
 
 
 const registerSeller = async (request, response) => {
+    console.log("Accessed - Register Seller API")
     try {
         let newSeller = request.body
         newSeller = { ...newSeller, sellerEmail: request.currentUser }
-        console.log(newSeller)
+        // console.log(newSeller)
         const response1 = await Seller(newSeller).save()
         const response2 = await User.updateOne({ email: request.currentUser }, { $set: { isSeller: true } })
         response.status(201)
@@ -24,6 +25,7 @@ const registerSeller = async (request, response) => {
 
 
 const getSeller = async (request, response) => {
+    console.log("Accessed - Get Seller API")
     try {
         const details = await Seller.findOne({ sellerEmail: request.currentUser })
         response.status(200)
@@ -31,10 +33,12 @@ const getSeller = async (request, response) => {
     } catch (err) {
         response.status(400)
         response.send({ msg: "something went wrong" })
+        console.log(err)
     }
 }
 
 const updateSeller = async (request, response) => {
+    console.log("Accessed - update Seller API")
     try {
         console.log("update seller accessed")
         const details = await Seller.updateOne({ sellerEmail: request.currentUser }, { $set: { ...request.body } })

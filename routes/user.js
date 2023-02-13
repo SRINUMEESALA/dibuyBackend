@@ -7,6 +7,7 @@ const userRoute = new express.Router()
 
 
 const userDetails = async (request, response) => {
+    console.log("Accessed - User Details API")
     try {
         const result = await User.find({ email: request.params.email })
         response.status(200)
@@ -25,6 +26,7 @@ const sendEmail = async (request, response) => {
 }
 
 const sendQr = async (request, response) => {
+    console.log("Accessed - Send QR API")
     try {
         const user = await User.findOne({ email: request.currentUser })
         const forQR = `${user.name}`
@@ -47,6 +49,7 @@ const sendQr = async (request, response) => {
 }
 
 const updateUserDetails = async (request, response) => {
+    console.log("Accessed - Update User Details API")
     try {
         if (request.body.profilepic === "") {
             const updatedPassword = request.query.newpassword
