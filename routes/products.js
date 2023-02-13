@@ -89,6 +89,28 @@ const getSellerProducts = async (request, response) => {
 }
 
 
+const findCategories = async (request, response) => {
+    try {
+        const res = await Product.aggregate([
+            { $group: { _id: "$category" } }
+        ])
+        let finalCat = []
+        const resultantCategories = res.forEach(e => {
+            if (e._id !== null) {
+                finalCat.push({ label: e._id, id: e._id })
+            }
+        })
+        response.status(200)
+        response.send(finalCat)
+    } catch (err) {
+        response.status(500)
+        response.send({ msg: "Can't get products categories" })
+    }
+
+
+}
+
+
 
 
 
@@ -98,10 +120,19 @@ productsRoute.get("/products", products)
 productsRoute.get("/product/:id", product)
 productsRoute.post("/products/add", authorizeUser, addProduct)
 productsRoute.get("/seller/products", authorizeUser, getSellerProducts)
+productsRoute.get("/products/categories", authorizeUser, findCategories)
 
 
 export default productsRoute
 
 
 
+
 // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRW1haWwiOiJzcmludXNyaTc2NTg1QGdtYWlsLmNvbSIsImlhdCI6MTY3NDcwODgzMX0.QNkp8Y4jhoKIezwAm8Nc4RYtHYeTX7AbgifIRLfCvpY"
+
+
+
+// const a = async () => {
+//     const del = await Product.deleteMany()
+// }
+// a()
