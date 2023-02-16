@@ -84,8 +84,8 @@ const sendOtp = async (request, response) => {
             port: 587,
             secure: false, // true for 465, false for other ports
             auth: {
-                user: "dibuy.india.organization@gmail.com", // generated ethereal user
-                pass: "lkrhrrgorjkznjpu"
+                user: "dibuy.india.org@gmail.com", // generated ethereal user
+                pass: "mcxnnnqxuykyvjvs"
             },
         });
 
