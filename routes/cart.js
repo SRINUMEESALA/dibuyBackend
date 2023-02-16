@@ -106,7 +106,7 @@ const placeOrderAndEmptyCart = async (request, response) => {
                 auth: {
                     user: "dibuy.india.organization@gmail.com", // generated ethereal user
                     // pass: "ypbxrkdkchrzkxwj", // generated ethereal password
-                    pass: "xookjtzvbqhvqpss", // generated ethereal password
+                    pass: "lkrhrrgorjkznjpu", // generated ethereal password
                 },
             });
 

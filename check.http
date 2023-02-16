@@ -18,7 +18,7 @@ GET http://localhost:4000/products
 GET http://localhost:4000/product/63c7c952078701e7641f8ab4
 
 ###
-GET http://localhost:4000/products?category=All&price=HighToLow&quality=1&search=""
+GET http://localhost:4000/products?category=All&price=HighToLow&quality=1&search=""&saleType=government
 
 
 ###
@@ -96,13 +96,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRW1haWwiOiJzc
 Content-Type: application/json
 
 {
-      "category": "Decoration",
-      "title": "Radha Idol",
+      "category": "others",
+      "title": "aaaa",
       "quantity": "100",
       "quality": "4.6",
       "price": 1000,
       "description": "Hare Krishna mahamantra is the best one in the world for salvation.",
-      "imageUrl":""
+      "imageUrl":"",
+      "saleType":"government"
 }
 
 ###

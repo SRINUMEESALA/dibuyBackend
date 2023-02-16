@@ -24,7 +24,7 @@ const product = async (request, response) => {
 
 const products = async (request, response) => {
     console.log("Accessed - Products API")
-    let { category, price, quality, search } = request.query
+    let { category, price, quality, search, saleType } = request.query
     const reg = search === '""' ? new RegExp('', "i") : new RegExp(search, "i")
     let order;
     if (price === "HighToLow") {
@@ -34,7 +34,7 @@ const products = async (request, response) => {
     }
     if (category === "All") {
         try {
-            const data = await Product.find({ quality: { $gte: quality }, title: reg }).sort({ price: order })
+            const data = await Product.find({ quality: { $gte: quality }, title: reg, saleType }).sort({ price: order })
             response.status(200)
             response.send({ productsList: data })
         } catch (err) {
@@ -44,7 +44,7 @@ const products = async (request, response) => {
         }
     } else {
         try {
-            const data = await Product.find({ quality: { $gte: quality }, category, title: reg }).sort({ price: order })
+            const data = await Product.find({ quality: { $gte: quality }, category, title: reg, saleType }).sort({ price: order })
             response.status(200)
             response.send({ productsList: data })
         } catch (err) {
