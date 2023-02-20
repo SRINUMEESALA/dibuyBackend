@@ -12,7 +12,7 @@ const product = async (request, response) => {
         const _id = request.params.id
         const productsList = await Product.find({ _id })
         const similarProducts = await Product.find({ category: productsList[0].category }).limit(8)
-        console.log()
+        // console.log()
         response.status(200)
         response.send({ product: productsList[0], similarProducts })
     } catch (err) {
@@ -118,6 +118,18 @@ const findCategories = async (request, response) => {
 }
 
 
+const getProductsForGovt = async (request, response) => {
+    try {
+        const products = await Product.find({ saleType: "government" })
+        response.status(200)
+        response.send({ productsLst: products })
+    } catch (err) {
+        console.log(err)
+        response.status(500)
+        response.send({ msg: "Could not get products for Govt" })
+    }
+}
+
 
 
 
@@ -128,6 +140,7 @@ productsRoute.get("/product/:id", product)
 productsRoute.post("/products/add", authorizeUser, addProduct)
 productsRoute.get("/seller/products", authorizeUser, getSellerProducts)
 productsRoute.get("/products/categories", authorizeUser, findCategories)
+productsRoute.get("/products/products-for-govt", authorizeUser, getProductsForGovt)
 
 
 export default productsRoute
@@ -140,6 +153,7 @@ export default productsRoute
 
 
 // const a = async () => {
-//     const del = await Product.deleteMany()
+//     // const del = await Product.deleteMany()
+//     const update = await Product.updateMany({ saleType: "general" })
 // }
 // a()

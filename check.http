@@ -18,8 +18,10 @@ GET http://localhost:4000/products
 GET http://localhost:4000/product/63c7c952078701e7641f8ab4
 
 ###
-GET http://localhost:4000/products?category=All&price=HighToLow&quality=1&search=""&saleType=government
+GET http://localhost:4000/products?category=All&price=HighToLow&quality=1&search=""&saleType=general
 
+###
+GET http://localhost:4000/products?category=All&price=LowToHigh&quality=4&search=""&saleType=general
 
 ###
 POST https://dibuybe.onrender.com/user/verify
@@ -130,3 +132,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRW1haWwiOiJzc
 ###
 GET http://localhost:4000/products/categories
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRW1haWwiOiJzcmludXNyaTc2NTg1QGdtYWlsLmNvbSIsImlhdCI6MTY3NDcwODgzMX0.QNkp8Y4jhoKIezwAm8Nc4RYtHYeTX7AbgifIRLfCvpY
+
+
+###
+GET http://localhost:4000/products/products-for-govt
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRW1haWwiOiJzcmludXNyaTc2NTg1QGdtYWlsLmNvbSIsImlhdCI6MTY3NDcwODgzMX0.QNkp8Y4jhoKIezwAm8Nc4RYtHYeTX7AbgifIRLfCvpY
+
+
+###
+POST http://localhost:4000/admin/login
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRW1haWwiOiJzcmludXNyaTc2NTg1QGdtYWlsLmNvbSIsImlhdCI6MTY3NDcwODgzMX0.QNkp8Y4jhoKIezwAm8Nc4RYtHYeTX7AbgifIRLfCvpY
+Content-Type: application/json
+
+{
+      "adminId":"krishna",
+      "password":"krishna"
+}
