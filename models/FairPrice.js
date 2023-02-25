@@ -4,7 +4,7 @@ const fairPricesSchema = new mongoose.Schema({
     name: String,
     category: String,
     fairPrice: Number,
-    marketPrice: Number,
+    dealerPrice: Number,
     image: String
 })
 

@@ -168,6 +168,27 @@ const verifyAdmin = async (request, response) => {
     }
 }
 
+const verifyToken = async (request, response) => {
+    console.log("Accessed - AdmverifyToken API")
+    const { key } = request.body
+    try {
+        jwt.verify(key, process.env.qrSecretCode, async (error, payload) => {
+            if (error) {
+                response.status(401)
+                response.send({ isValidUser: false, msg: `Invalid User` })
+            } else {
+                response.status(200)
+                response.send({ isValidUser: true, msg: `Valid User - ${payload.code}` })
+            }
+        })
+
+    } catch (err) {
+        console.log(err)
+        response.status(500)
+        response.send({ msg: "Invalid User" })
+    }
+}
+
 
 
 
@@ -180,6 +201,7 @@ authenticationRoute.post("/user/sendotp", sendOtp)
 authenticationRoute.post("/user/verifyotp", verifyOtp)
 authenticationRoute.post("/user/verify", verifyUser)
 authenticationRoute.post("/admin/login", authorizeUser, verifyAdmin)
+authenticationRoute.post("/admin/token-authentication", authorizeUser, verifyToken)
 
 
 

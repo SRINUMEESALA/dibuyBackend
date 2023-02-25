@@ -152,3 +152,30 @@ Content-Type: application/json
 ###
 GET http://localhost:4000/fair-price?search=oats&category=grains
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRW1haWwiOiJzcmludXNyaTc2NTg1QGdtYWlsLmNvbSIsImlhdCI6MTY3NDcwODgzMX0.QNkp8Y4jhoKIezwAm8Nc4RYtHYeTX7AbgifIRLfCvpY
+
+###
+GET http://localhost:4000/fair-price/getproducts?category=
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRW1haWwiOiJzcmludXNyaTc2NTg1QGdtYWlsLmNvbSIsImlhdCI6MTY3NDcwODgzMX0.QNkp8Y4jhoKIezwAm8Nc4RYtHYeTX7AbgifIRLfCvpY
+
+###
+POST http://localhost:4000/fair-price/update
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRW1haWwiOiJzcmludXNyaTc2NTg1QGdtYWlsLmNvbSIsImlhdCI6MTY3NDcwODgzMX0.QNkp8Y4jhoKIezwAm8Nc4RYtHYeTX7AbgifIRLfCvpY
+Content-Type: application/json
+
+{
+    "category":"grains",
+    "product":"Wheat",
+    "dealerPrice":2777,
+    "mrp":3777
+}
+
+
+
+###
+POST http://localhost:4000/admin/token-authentication
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRW1haWwiOiJzcmludXNyaTc2NTg1QGdtYWlsLmNvbSIsImlhdCI6MTY3NDcwODgzMX0.QNkp8Y4jhoKIezwAm8Nc4RYtHYeTX7AbgifIRLfCvpY
+Content-Type: application/json
+
+{
+    "key":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2RlIjoic3JpbnVzcmk3NjU4NUBnbWFpbC5jb20iLCJpYXQiOjE2NzczMzMyNTl9.Dsy-lupDwVfhBntIyJ3mq3ns9YXYlderIIAoAiwcTCY"
+}
