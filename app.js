@@ -7,7 +7,9 @@ import cartRoute from "./routes/cart.js";
 import sellerRoute from "./routes/Seller.js";
 import bodyParser from 'body-parser';
 import userRoute from "./routes/user.js";
+import FairPriceRoute from "./routes/FairPrice.js";
 import cors from "cors"
+
 const app = express()
 dotenv.config()
 
@@ -25,6 +27,7 @@ app.use(productsRoute)
 app.use(cartRoute)
 app.use(userRoute)
 app.use(sellerRoute)
+app.use(FairPriceRoute)
 
 
 
