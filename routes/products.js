@@ -85,7 +85,7 @@ const getSellerProducts = async (request, response) => {
         const productsList = getUser.products
         const allProducts = await Product.find({ _id: { $in: productsList } })
         response.status(200)
-        response.send({ products: allProducts })
+        response.send({ products: allProducts.reverse() })
     } catch (err) {
         console.log(err)
         response.status(400)
