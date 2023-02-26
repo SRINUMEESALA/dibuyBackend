@@ -29,10 +29,9 @@ const sendEmail = async (request, response) => {
 const sendQr = async (request, response) => {
     console.log("Accessed - Send QR API")
     const qrEncodedKey = jwt.sign({ code: request.currentUser }, process.env.qrSecretCode);
+    console.log(qrEncodedKey)
     try {
-        const user = await User.findOne({ email: request.currentUser })
-        const forQR = `${qrEncodedKey}`
-        qr.toDataURL(forQR, (err, src) => {
+        qr.toDataURL(qrEncodedKey, (err, src) => {
             if (err) {
                 response.status(500)
                 response.send({ msg: "Couldnot get qr Image" })
