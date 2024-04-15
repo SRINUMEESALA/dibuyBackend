@@ -317,7 +317,7 @@ const verifyOtp = async (request, response) => {
     otpsList.filter(
       (obj) => obj.generatedOtp === receivedOtp && obj.UserEmail === UserEmail
     ).length === 1;
-  if (isValidOtp || receivedOtp === "888888") {
+  if (isValidOtp) {
     const payload = { UserEmail };
     const jwtToken = jwt.sign(payload, process.env.secretCode);
     response.status(200);
