@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import authorizeUser from "../middlewares/authorizeUser.js";
 import jwt from "jsonwebtoken";
 import * as dotenv from "dotenv";
+import { Resend } from "resend";
 dotenv.config();
 
 const authenticationRoute = new express.Router();
@@ -133,7 +134,9 @@ const sendOtp = async (request, response) => {
   // }
 
   // sendOtpByNodemailer();
+
   async function sendOtpByResend() {
+    const resend = new Resend("re_BHmdVvnb_BTgPi55rkUeDrhex9PZha8sU");
     console.log("Accessed - sendOTP api");
 
     // const htmlCode = `<div><h5>Hello Dear Customer.Your One Time Password is</h5><h1>${generatedOtp}</h1><p>Please donot share the password with anyone.</p><p>Your OTP get expired in next 10 minute.</p><br><b>Find some product suggestions below..</b><br><p>New Bhagavan Sri Krishna Frame at <b>Rs.499</b></p><p>To buy click below <br><a href="https://dibuy.netlify.app/">Buy Product on Dibuy</a></p><img src='cid:krishna' width='100%'/><br><br><br><b><i>Thanks&regards:<br>Dibuy<br>RGUKT Srikakulam<br>Andhra Pradesh</i></b><p><b>Happing Shopping-RK</b></p></div> `;
