@@ -213,7 +213,7 @@ const sendOtp = async (request, response) => {
       </div>
       <div class="footer">
         <p><strong>Thanks & Regards:</strong> Dibuy, RGUKT Srikakulam, Andhra Pradesh</p>
-        <p><strong>Happy Shopping - RK</strong></p>
+        <p><strong>Happy Shopping - Dibuy India</strong></p>
       </div>
     </div>
   
@@ -226,7 +226,7 @@ const sendOtp = async (request, response) => {
       },
       to: UserEmail, // list of receivers
       subject: "Login Attempt", // Subject line
-      text: "Say with me 'RadheRadhe'", // plain text body
+      text: "Please verify the login", // plain text body
       html: htmlCode,
       attachments: [
         {
